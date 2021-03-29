@@ -24,7 +24,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 
 // setting port
 const port = 5000;
-app.listen(port, () => {
+app.listen(process.env.PORT || port, () => {
 	console.log('liseting you')
 });
 
