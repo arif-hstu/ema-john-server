@@ -29,7 +29,11 @@ app.listen(process.env.PORT || port, () => {
 });
 
 
-
+/***********
+*
+* server requests go here
+*
+*************/
 // deal with mongodb
 client.connect(err => {
 	const productsCollection = client.db(process.env.DB_NAME).collection("products");
@@ -40,6 +44,10 @@ client.connect(err => {
 		productsCollection.insertOne(req.body);
 		res.send(JSON.stringify({message: 'Your product added to the Database!'}))
 	})
+})
+
+app.get('/', (req, res) => {
+	res.send('Your api is working');
 })
 
 
