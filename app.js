@@ -39,12 +39,22 @@ client.connect(err => {
 	const productsCollection = client.db(process.env.DB_NAME).collection("products");
 	console.log('database connection successful');
 
+	// add a single product request
 	app.post('/addProduct', (req, res) => {
 		console.log(req.body)
 		productsCollection.insertOne(req.body);
 		res.send(JSON.stringify({message: 'Your product added to the Database!'}))
 	})
+
+	// get all products by request
+	app.get('/allProducts', (req,res) => {
+		productsCollection.find()
+		.toArray((err, documents) => {
+			res.send(documents)
+		})
+	})
 })
+
 
 app.get('/', (req, res) => {
 	res.send('Your api is working');
